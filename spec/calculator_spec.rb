@@ -3,7 +3,7 @@ require 'calculator'
 describe Calculator do
 
   let( :calculator ) { Calculator.new }
-  
+
   describe "#add" do
     it "sum of positive integers" do
       expect(calculator.add(2, 3)).to eq(5)
@@ -99,7 +99,7 @@ describe Calculator do
     end
 
     it "divides floats" do
-      expect(calculator.divide(6.0,7.0)).to be_within(0.01).of(0.85) 
+      expect(calculator.divide(6.0,7.0)).to be_within(0.01).of(0.85)
     end
 
     it "divides float and int" do
@@ -168,7 +168,7 @@ describe Calculator do
       expect(calculator.sqrt(16)).to eq(4)
     end
 
-    it "takes square root of negative int" do
+    it "square root of negative int raises error" do
       expect{calculator.sqrt(-64)}.to raise_error(ArgumentError)
     end
 
@@ -176,7 +176,7 @@ describe Calculator do
       expect(calculator.sqrt(36.0)).to eq(6.0)
     end
 
-    it "takes square root of negative float" do
+    it "square root of negative float raises error" do
       expect{calculator.sqrt(-49.0)}.to raise_error(ArgumentError)
     end
 
@@ -184,8 +184,25 @@ describe Calculator do
       expect(calculator.sqrt(74)).to eq(8.60)
     end
 
-
   end
 
+  describe "#memory=" do
+    it "stores a value in memory" do
+      calculator.memory = 3
+      expect(calculator.instance_variable_get(:@memory)).to eq(3)
+    end
+  end
 
+  describe "#memory" do
+    it "retrieves a value from memory" do
+      calculator.instance_variable_set(:@memory,3)
+      expect(calculator.memory).to eq(3)
+    end
+
+    it "resets memory after retrieval" do
+      calculator.memory = 3
+      calculator.memory
+      expect(calculator.memory).to eq(nil)
+    end
+  end
 end

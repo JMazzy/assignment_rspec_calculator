@@ -46,5 +46,5 @@ class Calculator
   def output(result)
     @stringify ? result.to_s : result
   end
-  
+
 end
