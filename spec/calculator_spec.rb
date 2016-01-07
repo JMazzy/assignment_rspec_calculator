@@ -3,6 +3,21 @@ require 'calculator'
 describe Calculator do
 
   let( :calculator ) { Calculator.new }
+  let( :string_calculator ) { Calculator.new(true) }
+
+  describe "#initialize" do
+    it "sets stringify to false by default" do
+      expect(calculator.stringify).to eq(false)
+    end
+
+    it "properly sets stringify to true if parameter is set" do
+      expect(string_calculator.stringify).to eq(true)
+    end
+
+    it "tests that initial memory is nil" do
+      expect(calculator.memory).to eq(nil)
+    end
+  end
 
   describe "#add" do
     it "sum of positive integers" do
@@ -203,6 +218,12 @@ describe Calculator do
       calculator.memory = 3
       calculator.memory
       expect(calculator.memory).to eq(nil)
+    end
+  end
+
+  describe "#stringify" do
+    it "properly stringifies the output" do
+      expect(string_calculator.add(2, 3)).to eq("5")
     end
   end
 end

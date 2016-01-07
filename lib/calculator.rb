@@ -1,4 +1,6 @@
 class Calculator
+  attr_accessor :stringify
+
   def initialize(stringify = false)
     @memory = nil
     @stringify = stringify
